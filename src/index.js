@@ -10,7 +10,7 @@ const app = express();
 
 app.get("/", async (req, res) => {
   res.send("chal rha hai ");
-  console.log("okie");
+  console.log("okie s");
 });
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
