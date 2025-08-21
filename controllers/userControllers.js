@@ -12,7 +12,7 @@ export const registerUser = async (req, res) => {
   const userExists = await User.findOne({ email });
 
   if (userExists)
-    return res.status(400).json({ message: "emai already registered" });
+    return res.status(400).json({ message: "email already registered" });
 
   // hash password with bcrypt
   // in this we are  generating a random string which will be added to our passwrod for unique hash
