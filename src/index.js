@@ -10,7 +10,7 @@ dotenv.config({ path: "./.env" });
 const app = express();
 
 app.get("/", async (req, res) => {
-  res.send(" arey wahh chal gaya !!!");
+  res.send("SERVER IS RUNNING !!!");
   console.log("SERVER IS FINE AND KICKING");
 });
 
