@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import connectdb from "./db/index.js";
 import dotenv from "dotenv";
-import create_userRoutes from "gym-management/routes/create_user.routes.js";
+import create_userRoutes from "../routes/create_user.routes.js";
 connectdb();
 
 dotenv.config({ path: "./.env" });
@@ -14,7 +14,7 @@ app.get("/", async (req, res) => {
   console.log("SERVER IS FINE AND KICKING");
 });
 
-//Routes 
+//Routes
 app.use("/api", create_userRoutes);
 
 const PORT = process.env.PORT || 8000;
