@@ -4,7 +4,7 @@ export const protect = async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startswith("Bearer")
+    req.headers.authorization.startsWith("Bearer")
   ) {
     try {
       // here we are extracting jwt token as it start with bearer so split spreate them and on the second postion that means on 1st index there is jwt token
