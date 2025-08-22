@@ -2,7 +2,7 @@ import express from "express";
 import { getAllUser } from "../controllers/userControllers.js";
 import { protect } from "../middlewares/authUser.middlewares.js";
 import { adminOnly } from "../middlewares/admin.middleware.js";
-import { addPlan } from "../controllers/addPlan.controllers.js";
+import { addPlan } from "../controllers/plans.controllers.js";
 
 const router = express.Router();
 
