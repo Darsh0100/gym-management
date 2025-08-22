@@ -4,6 +4,7 @@ import connectdb from "./db/index.js";
 import dotenv from "dotenv";
 import create_userRoutes from "../routes/create_user.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
+
 connectdb();
 
 dotenv.config({ path: "./.env" });
