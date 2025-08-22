@@ -4,7 +4,7 @@ export const addPlan = async(req,res) => {
      try{
        const{name, description, duration, price} = req.body;  
 
-       const newPlan = await Plan.create({name, description, duration, price});
+       const newPlan = await Plan.create({name, description, durationInDays, price});
        res.status(201).json({
           success: true,
           plan: newPlan
