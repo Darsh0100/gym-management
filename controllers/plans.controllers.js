@@ -20,7 +20,7 @@ export const addPlan = async(req,res) => {
 // this gets all the plans available in the database for the user whether loggedin or not
 export const getPlans = async(req,res) => {
     try{
-       const plans = Plan.find().lean();// this fetches all the plan available in the database
+       const plans = await Plan.find().lean();// this fetches all the plan available in the database
        // .lean() represents the mongoDB object data as json format 
        res.status(200).json({
          success: true,
