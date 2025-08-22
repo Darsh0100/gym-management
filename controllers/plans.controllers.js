@@ -1,5 +1,6 @@
 import { Plan } from "../models/plans.models.js";
 
+// lets admin add the plans to the database
 export const addPlan = async(req,res) => {
      try{
        const{name, description, durationInDays, price} = req.body;  
@@ -14,4 +15,20 @@ export const addPlan = async(req,res) => {
          message: error.message
        });
      }
+};
+
+// this gets all the plans available in the database for the user whether loggedin or not
+export const getPlans = async(req,res) => {
+    try{
+       const plans = Plan.find();// this fetches all the plan available in the database
+       res.status(200).json({
+         success: true,
+         plans
+       });  
+    }
+    catch(error){
+       res.status(500).json({
+          error: error.message
+       });
+    }
 };

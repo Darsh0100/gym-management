@@ -4,6 +4,7 @@ import connectdb from "./db/index.js";
 import dotenv from "dotenv";
 import create_userRoutes from "../routes/create_user.routes.js";
 import adminRoutes from "../routes/admin.routes.js";
+import plansRoutes from "../routes/plans.routes.js";
 
 connectdb();
 
@@ -21,6 +22,7 @@ app.get("/", async (req, res) => {
 //Routes
 app.use("/api", create_userRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api", plansRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
