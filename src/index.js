@@ -3,6 +3,7 @@ import express from "express";
 import connectdb from "./db/index.js";
 import dotenv from "dotenv";
 import create_userRoutes from "../routes/create_user.routes.js";
+import adminRoutes from "../routes/admin.routes.js";
 connectdb();
 
 dotenv.config({ path: "./.env" });
@@ -18,6 +19,7 @@ app.get("/", async (req, res) => {
 
 //Routes
 app.use("/api", create_userRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
