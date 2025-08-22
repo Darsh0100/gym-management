@@ -47,6 +47,7 @@ export const loginUser = async (req, res) => {
   if (!isMatch) return res.status(400).json({ message: "wrong password" });
 
   res.status(201).json({
+    message: "login successfull",
     _id: user._id,
     name: user.name,
     email: user.email,
