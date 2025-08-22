@@ -2,7 +2,7 @@ import { Plan } from "../models/plans.models.js";
 
 export const addPlan = async(req,res) => {
      try{
-       const{name, description, duration, price} = req.body;  
+       const{name, description, durationInDays, price} = req.body;  
 
        const newPlan = await Plan.create({name, description, durationInDays, price});
        res.status(201).json({
