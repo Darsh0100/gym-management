@@ -14,6 +14,7 @@ router.post("/register", protect, registerUser);
 
 router.post("/login", loginUser);
 router.get("/profile", protect, getUserProfile);
-router.get("/profile", protect, authorize("admin"), getAllUser);
+
+router.get("/getAllUser", protect, authorize("admin"), getAllUser);
 
 export default router;
