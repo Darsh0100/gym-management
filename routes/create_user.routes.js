@@ -10,7 +10,7 @@ import { protect, authorize } from "../middlewares/authUser.middlewares.js";
 
 const router = express.Router();
 
-router.post("/register", protect, registerUser);
+router.post("/register", registerUser);
 
 router.post("/login", loginUser);
 router.get("/profile", protect, getUserProfile);
