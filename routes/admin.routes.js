@@ -3,5 +3,5 @@ import { protect, authorize } from "../middlewares/authUser.middlewares.js";
 import { getAllUser } from "../controllers/userControllers.js";
 const router = express.Router();
 
-router.get("/getAllUser", protect, authorize("admin"), getAllUser);
+router.get("/getallusers", protect, authorize("admin"), getAllUser);
 export default router;
