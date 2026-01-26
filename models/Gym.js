@@ -21,10 +21,22 @@ const gymSchema = new mongoose.Schema(
       type: [String], // e.g. ["Weights", "Cardio", "Trainer"]
       default: [],
     },
+    images: {
+      type: [String], // Cloudinary URLs
+      default: [],
+    },
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    reviewCount: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

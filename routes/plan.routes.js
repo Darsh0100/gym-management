@@ -4,6 +4,7 @@ const {
   createPlan,
   updatePlan,
   deletePlan,
+  getPlanById,
 } = require("../controllers/plan.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 
@@ -55,8 +56,28 @@ router.post(
   "/",
   authMiddleware(["owner"]),
   validate(createPlanSchema),
+  validate(createPlanSchema),
   createPlan
 );
+
+/**
+ * @swagger
+ * /plans/{id}:
+ *   get:
+ *     summary: Get a single plan
+ *     tags: [Plans]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Plan details
+ */
+// 🌍 Public – get single plan
+router.get("/:id", getPlanById);
 
 /**
  * @swagger

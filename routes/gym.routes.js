@@ -10,11 +10,14 @@ const {
 const validate = require("../middleware/validate");
 
 const { getPlansByGym } = require("../controllers/plan.controller");
+const { addReview, getGymReviews } = require("../controllers/review.controller");
 
 const {
   createGymSchema,
   updateGymSchema,
 } = require("../validations/gym.validation");
+
+const upload = require("../config/cloudinary");
 
 const authMiddleware = require("../middleware/auth.middleware");
 /**
@@ -92,6 +95,12 @@ router.get("/:id", getGymById);
 // 🌍 Public – get plans of a gym
 router.get("/:id/plans", getPlansByGym);
 
+// 🌍 Public – get reviews of a gym
+router.get("/:gymId/reviews", getGymReviews);
+
+// 🔒 User only – add review
+router.post("/:gymId/reviews", authMiddleware(), addReview);
+
 /**
  * @swagger
  * /gyms:
@@ -131,6 +140,7 @@ router.get("/:id/plans", getPlansByGym);
 router.post(
   "/",
   authMiddleware(["owner"]),
+  upload.array("images", 5), // Allow up to 5 images
   validate(createGymSchema),
   createGym
 );
@@ -162,6 +172,7 @@ router.post(
 router.put(
   "/:id",
   authMiddleware(["owner"]),
+  upload.array("images", 5),
   validate(updateGymSchema),
   updateGym
 );

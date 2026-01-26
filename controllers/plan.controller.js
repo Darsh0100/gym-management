@@ -50,6 +50,22 @@ exports.getPlansByGym = async (req, res) => {
 };
 
 /**
+ * GET /plans/:id
+ * Public – get single plan details
+ */
+exports.getPlanById = async (req, res) => {
+  try {
+    const plan = await Plan.findById(req.params.id);
+    if (!plan) {
+      return res.status(404).json({ message: "Plan not found" });
+    }
+    res.json(plan);
+  } catch (error) {
+    res.status(400).json({ message: "Invalid plan ID" });
+  }
+};
+
+/**
  * PUT /plans/:id
  * Owner only – update plan
  */

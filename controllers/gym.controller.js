@@ -40,6 +40,7 @@ exports.getAllGyms = async (req, res) => {
       gyms,
     });
   } catch (error) {
+    console.error("Error in getAllGyms:", error);
     res.status(500).json({ message: "Failed to fetch gyms" });
   }
 };
@@ -72,12 +73,16 @@ exports.createGym = async (req, res) => {
   try {
     const { name, address, city, description, facilities } = req.body;
 
+    // Get image URLs from Cloudinary response
+    const images = req.files ? req.files.map(file => file.path) : [];
+
     const gym = await Gym.create({
       name,
       address,
       city,
       description,
       facilities,
+      images,
       ownerId: req.user.id, // from JWT middleware
     });
 
@@ -101,7 +106,15 @@ exports.updateGym = async (req, res) => {
       return res.status(403).json({ message: "Not your gym" });
     }
 
+    // Start with updates from body
     Object.assign(gym, req.body);
+
+    // If new images are uploaded, append them
+    if (req.files && req.files.length > 0) {
+      const newImages = req.files.map(file => file.path);
+      gym.images = [...(gym.images || []), ...newImages];
+    }
+
     await gym.save();
 
     res.json(gym);

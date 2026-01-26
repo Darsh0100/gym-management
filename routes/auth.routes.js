@@ -17,19 +17,20 @@ router.get(
   passport.authenticate("google", { session: false }),
   (req, res) => {
     const token = jwt.sign(
-      { id: req.user._id, role: req.user.role },
+      { id: req.user._id, role: req.user.role, name: req.user.name },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    res.json({
-      message: "Google login successful",
-      token,
-    });
+    // Redirect to frontend with token
+    res.redirect(`http://localhost:5173/auth/callback?token=${token}`);
+
   }
 );
 
 const authMiddleware = require("../middleware/auth.middleware");
+
+const authController = require("../controllers/auth.controller");
 
 router.get("/me", authMiddleware(), (req, res) => {
   res.json({
@@ -37,5 +38,7 @@ router.get("/me", authMiddleware(), (req, res) => {
     user: req.user,
   });
 });
+
+router.put("/me", authMiddleware(), authController.updateProfile);
 
 module.exports = router;

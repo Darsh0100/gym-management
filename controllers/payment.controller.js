@@ -17,6 +17,17 @@ exports.createPayment = async (req, res) => {
 
     const gym = await Gym.findById(plan.gymId);
 
+    // 🔴 PREVENT DUPLICATE ENROLLMENT (Fast Fail)
+    const existingEnrollment = await Enrollment.findOne({
+      userId: req.user.id,
+      planId: plan._id,
+      status: "active",
+    });
+
+    if (existingEnrollment) {
+      return res.status(400).json({ message: "You are already active in this plan." });
+    }
+
     const payment = await Payment.create({
       userId: req.user.id,
       gymId: gym._id,
@@ -51,6 +62,17 @@ exports.confirmPayment = async (req, res) => {
     // security: user can confirm only their own payment
     if (payment.userId.toString() !== req.user.id) {
       return res.status(403).json({ message: "Not authorized" });
+    }
+
+    // 🔴 PREVENT DUPLICATE ENROLLMENT (Double Check)
+    const existingEnrollment = await Enrollment.findOne({
+      userId: payment.userId,
+      planId: payment.planId,
+      status: "active",
+    });
+
+    if (existingEnrollment) {
+      return res.status(400).json({ message: "You are already active in this plan. Payment cancelled." });
     }
 
     // mark payment success
