@@ -11,7 +11,7 @@ const GoogleIcon = () => (
 
 const Login = () => {
     const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:5001/auth/google';
+        window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/auth/google`;
 
     };
 
