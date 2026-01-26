@@ -30,7 +30,7 @@ const authMiddleware = require("../middleware/auth.middleware");
  */
 
 // 👤 User only – enroll
-router.post("/enroll", authMiddleware(["user"]), enrollUser);
+router.post("/enroll", authMiddleware(["user", "owner", "admin"]), enrollUser);
 
 /**
  * @swagger
@@ -46,6 +46,6 @@ router.post("/enroll", authMiddleware(["user"]), enrollUser);
  */
 
 // 👤 User only – view enrollments
-router.get("/my-enrollments", authMiddleware(["user"]), getMyEnrollments);
+router.get("/my-enrollments", authMiddleware(["user", "owner", "admin"]), getMyEnrollments);
 
 module.exports = router;
