@@ -23,7 +23,8 @@ router.get(
     );
 
     // Redirect to frontend with token
-    res.redirect(`http://localhost:5173/auth/callback?token=${token}`);
+    const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+    res.redirect(`${clientUrl}/auth/callback?token=${token}`);
 
   }
 );
